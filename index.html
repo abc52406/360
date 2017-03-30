@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+  <script src="js/modernizr-2.7.1-csstransforms3d-canvas-touch.js"></script>
+  <script src="js/megapix-image.js"></script>
+  <script src="http://cdn.bootcss.com/three.js/r63/three.min.js"></script>
+  <script src="js/Detector.js"></script>
+  <script src="js/CSS3DRenderer.js"></script>
+  <script src="js/theta-viewer.min.js"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Sample of THETA Viewer</title>
+</head>
+<body>
+  <div id="theta-viewer"></div>
+  <script>
+(function ($) {
+    'use strict';
+    var view=$("#theta-viewer").createThetaViewer('images/1.jpg');//在此插入图片即可
+}(jQuery));
+  </script>
+</body>
+</html>
