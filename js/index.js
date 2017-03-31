@@ -25,7 +25,9 @@ $(function () {
 			panorama: imgpath,
 			container: div,
 			time_anim: false,
-			navbar: true,
+            navbar: true,
+            min_fov: 1,
+            max_fov:179,
 			size: {
 				width: w,
 				height: h
