@@ -25,11 +25,24 @@
             vertical-align: middle;
             display:inline-block
         }
+        .roll {
+            -webkit-animation: 2.5s linear roll 0s infinite;
+        }
+
+        @-webkit-keyframes roll {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
 	<div id="container"></div>
-    <div class="loading"><img src="loading.png" alt="loading"><span></span></div>
+    <div class="loading"><img src="loading.jpg" alt="loading" class="roll"><span></span></div>
 </body>
 </html>
 <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>

@@ -28,7 +28,10 @@ $(function () {
 				width: w,
 				height: h
             },
-            onready: function () { $(".loading").hide();}
+            loading_msg:'',
+            onready: function () {
+                $(".loading").hide();
+            }
 		});
     }
 	function upload() {
