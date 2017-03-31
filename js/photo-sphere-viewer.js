@@ -2383,8 +2383,11 @@ Sphoords.isDeviceOrientationSupported = false;
 (function() {
 	// We attach the right event
 	// If it is fired, the API is really supported so we can indicate true :)
+    console.log('window.DeviceOrientationEvent ' + window.DeviceOrientationEvent)
+    console.log('ScreenOrientation ' + Sphoords.getScreenOrientation())
 	if (!!window.DeviceOrientationEvent && Sphoords.getScreenOrientation() !== null) {
-		function testDeviceOrientation(evt) {
+        function testDeviceOrientation(evt) {
+            console.log('deviceorientation event ' + evt)
 			if (evt !== null && evt.alpha !== null) {
 				Sphoords.isDeviceOrientationSupported = true;
 				window.removeEventListener('deviceorientation', testDeviceOrientation);

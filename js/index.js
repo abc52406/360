@@ -18,9 +18,7 @@ $(function () {
         })
     }
     if (GetQueryString("console") == "T") {
-        loadscript("http://staticftp.mgcc.com.cn/wechat/js/vconsole.min.js", function () {
-            console.log('isDeviceOrientationSupported ' + Sphoords.isDeviceOrientationSupported)
-        });
+        loadscript("http://staticftp.mgcc.com.cn/wechat/js/vconsole.min.js");
     }
 	function loadPredefinedPanorama() {
 		PSV = new PhotoSphereViewer({
