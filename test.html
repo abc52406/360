@@ -24,14 +24,12 @@
                 margin-top: 0;
                 margin-left: 0
             }
-
             body:not(.force-desktop) {
                 min-height: 0px;
                 background-image: url('');
                 overflow: hidden;
             }
         }
-
         .liner-bg.no-album.no-ad, .liner-bg.no-album, .liner-bg.no-ad {
             bottom: 0;
         }
@@ -111,7 +109,7 @@
         <div class="info-detail no-ad">
             <i class="cancle-detail iconfont">&#xe614;</i>
             <div class="info-text">
-
+                
             </div>
         </div>
     </div>
@@ -164,13 +162,13 @@
         });
 
         var xmlhttp;
-        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari  
             xmlhttp = new XMLHttpRequest();
         }
-        else {// code for IE6, IE5
+        else {// code for IE6, IE5  
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xmlhttp.open("GET", "https://s.insta360.com/p/" + _postId + "/scenes", false);
+        xmlhttp.open("GET", "https://s.insta360.com/p/" + _postId+ "/scenes", false);
         xmlhttp.send();
         var xmlstr = xmlhttp.responseXML.firstChild.innerHTML;
         var staticresult = xmlstr.substring(xmlstr.indexOf('thumb/') + 6, xmlstr.indexOf('start.jpg'));
