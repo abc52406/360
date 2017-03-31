@@ -9,7 +9,6 @@ $(function () {
     $(window).resize(function () {
         w = $(window).width(), h = $(window).height();
         $("#container,#container canvas").width(w).height(h);
-        PSV.fitToContainer();
     });
     if (GetQueryString("share") == "T") {
         loadscript("http://res.wx.qq.com/open/js/jweixin-1.0.0.js", function () {
@@ -17,6 +16,9 @@ $(function () {
                 loadscript("js/share.js")
             })
         })
+    }
+    if (GetQueryString("console") == "T") {
+        loadscript("http://staticftp.mgcc.com.cn/wechat/js/vconsole.min.js");
     }
 	function loadPredefinedPanorama() {
 		PSV = new PhotoSphereViewer({
@@ -32,7 +34,8 @@ $(function () {
             onready: function () {
                 $(".loading").hide();
             }
-		});
+        });
+        PSV.fitToContainer();
     }
 	function upload() {
 		var file = document.getElementById('pano').files[0];

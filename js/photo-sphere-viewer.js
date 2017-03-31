@@ -778,6 +778,7 @@ var PhotoSphereViewer = function(args) {
 
 				if (diff != 0) {
                     var direction = 2 * diff / Math.abs(diff);
+                    console.log('zoom:' + (zoom_lvl + direction));
 					zoom(zoom_lvl + direction);
 
 					touchzoom_dist = d;
@@ -812,7 +813,8 @@ var PhotoSphereViewer = function(args) {
 	 * @return {void}
 	 **/
 
-	var startDeviceOrientation = function() {
+    var startDeviceOrientation = function () {
+        console.log('start sphoords');
 		sphoords.start();
 		stopAutorotate();
 
@@ -831,7 +833,8 @@ var PhotoSphereViewer = function(args) {
 	 * @return {void}
 	 **/
 
-	var stopDeviceOrientation = function() {
+    var stopDeviceOrientation = function () {
+        console.log('stop sphoords');
 		sphoords.stop();
 
 		triggerAction('device-orientation', false);
@@ -2258,6 +2261,7 @@ var Sphoords = function() {
 		long = long_deg * DEG_TO_RAD;
 		lat = lat_deg * DEG_TO_RAD;
 
+        console.log('lng:' + long + ' lat:' + lat);
 		// We execute the wanted functions
 		executeListeners();
 	};
