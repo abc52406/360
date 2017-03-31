@@ -2366,7 +2366,9 @@ Sphoords.getScreenOrientation = function() {
 
     else if (!!window.msOrientation)
         screen_orientation = window.msOrientation;
-
+    console.log('window.orientation ' + window.orientation)
+    console.log('window.mozOrientation ' + window.mozOrientation)
+    console.log('window.msOrientation ' + window.msOrientation)
 	// Are the specs respected?
 	return (screen_orientation !== null && (typeof screen_orientation == 'object')) ? screen_orientation.type : screen_orientation;
 };
