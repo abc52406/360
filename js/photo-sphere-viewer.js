@@ -813,7 +813,6 @@ var PhotoSphereViewer = function(args) {
 	 **/
 
     var startDeviceOrientation = function () {
-        console.log('start sphoords');
 		sphoords.start();
 		stopAutorotate();
 
@@ -833,7 +832,6 @@ var PhotoSphereViewer = function(args) {
 	 **/
 
     var stopDeviceOrientation = function () {
-        console.log('stop sphoords');
 		sphoords.stop();
 
 		triggerAction('device-orientation', false);
@@ -1426,9 +1424,8 @@ var PSVNavBar = function(psv) {
 		container.appendChild(zoom.getButton());
 
 		// Fullscreen button
-		fullscreen = new PSVNavBarButton(psv, 'fullscreen', style);
-        container.appendChild(fullscreen.getButton());
-        console.log('isDeviceOrientationSupported ' + Sphoords.isDeviceOrientationSupported)
+		//fullscreen = new PSVNavBarButton(psv, 'fullscreen', style);
+        //container.appendChild(fullscreen.getButton());
 		if (Sphoords.isDeviceOrientationSupported) {
 			// Device orientation button
 			orientation = new PSVNavBarButton(psv, 'orientation', style);
@@ -2259,8 +2256,7 @@ var Sphoords = function() {
 
 		long = long_deg * DEG_TO_RAD;
 		lat = lat_deg * DEG_TO_RAD;
-
-        console.log('lng:' + long + ' lat:' + lat);
+        
 		// We execute the wanted functions
 		executeListeners();
 	};
@@ -2398,11 +2394,8 @@ Sphoords.isDeviceOrientationSupported = false;
 (function() {
 	// We attach the right event
 	// If it is fired, the API is really supported so we can indicate true :)
-    console.log('window.DeviceOrientationEvent ' + window.DeviceOrientationEvent)
-    console.log('ScreenOrientation ' + Sphoords.getScreenOrientation())
 	if (!!window.DeviceOrientationEvent && Sphoords.getScreenOrientation() !== null) {
         function testDeviceOrientation(evt) {
-            console.log('deviceorientation event ' + evt)
 			if (evt !== null && evt.alpha !== null) {
 				Sphoords.isDeviceOrientationSupported = true;
 				window.removeEventListener('deviceorientation', testDeviceOrientation);
