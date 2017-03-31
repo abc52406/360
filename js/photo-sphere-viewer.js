@@ -777,7 +777,7 @@ var PhotoSphereViewer = function(args) {
 				var diff = d - touchzoom_dist;
 
 				if (diff != 0) {
-					var direction = diff / Math.abs(diff)*2;
+					var direction = diff / Math.abs(diff)*1.2;
 					zoom(zoom_lvl + direction);
 
 					touchzoom_dist = d;
