@@ -131,7 +131,7 @@ var PhotoSphereViewer = function(args) {
 	var dist = function(x1, y1, x2, y2) {
 		var x = x2 - x1;
 		var y = y2 - y1;
-		return x*x + y*y;
+		return (x*x + y*y)*5;
 	};
 
 	/**
