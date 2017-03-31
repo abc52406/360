@@ -778,7 +778,6 @@ var PhotoSphereViewer = function(args) {
 
 				if (diff != 0) {
                     var direction = 2 * diff / Math.abs(diff);
-                    console.log('zoom:' + (zoom_lvl + direction));
 					zoom(zoom_lvl + direction);
 
 					touchzoom_dist = d;
@@ -1428,8 +1427,8 @@ var PSVNavBar = function(psv) {
 
 		// Fullscreen button
 		fullscreen = new PSVNavBarButton(psv, 'fullscreen', style);
-		container.appendChild(fullscreen.getButton());
-
+        container.appendChild(fullscreen.getButton());
+        console.log('isDeviceOrientationSupported ' + Sphoords.isDeviceOrientationSupported)
 		if (Sphoords.isDeviceOrientationSupported) {
 			// Device orientation button
 			orientation = new PSVNavBarButton(psv, 'orientation', style);
