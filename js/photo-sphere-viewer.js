@@ -2358,17 +2358,30 @@ var Sphoords = function() {
 Sphoords.getScreenOrientation = function() {
 	var screen_orientation = null;
 
-    if (!!window.orientation)
-        screen_orientation = window.orientation;
+    if (!!screen.orientation)
+        screen_orientation = screen.orientation;
 
-    else if (!!window.mozOrientation)
-        screen_orientation = window.mozOrientation;
+    else if (!!screen.mozOrientation)
+        screen_orientation = screen.mozOrientation;
 
-    else if (!!window.msOrientation)
-        screen_orientation = window.msOrientation;
-    console.log('window.orientation ' + window.orientation)
-    console.log('window.mozOrientation ' + window.mozOrientation)
-    console.log('window.msOrientation ' + window.msOrientation)
+    else if (!!screen.msOrientation)
+        screen_orientation = screen.msOrientation;
+    else if (typeof window.orientation !== 'undefined')
+        switch (window.orientation)
+        {
+            case 0:
+                screen_orientation = 'portrait-primary';
+                break;
+            case 90:
+                screen_orientation = 'landscape-primary';
+                break;
+            case -90:
+                screen_orientation = 'landscape-secondary';
+                break;
+            case 180:
+                screen_orientation = 'portrait-secondary';
+                break;
+        }
 	// Are the specs respected?
 	return (screen_orientation !== null && (typeof screen_orientation == 'object')) ? screen_orientation.type : screen_orientation;
 };
