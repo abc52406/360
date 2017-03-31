@@ -17,6 +17,9 @@ $(function () {
             })
         })
     }
+    if (GetQueryString("console") == "T") {
+        loadscript("http://staticftp.mgcc.com.cn/wechat/js/vconsole.min.js");
+    }
 	function loadPredefinedPanorama() {
 		PSV = new PhotoSphereViewer({
 			panorama: imgpath,
@@ -30,9 +33,11 @@ $(function () {
             loading_msg:'',
             onready: function () {
                 $(".loading").hide();
+                PSV.fitToContainer();
+                if (Sphoords.isDeviceOrientationSupported)
+                    PSV.toggleDeviceOrientation();
             }
         });
-        PSV.fitToContainer();
     }
 	function upload() {
 		var file = document.getElementById('pano').files[0];
