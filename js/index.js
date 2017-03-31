@@ -17,9 +17,9 @@ $(function () {
             })
         })
     }
-    if (GetQueryString("console") == "T") {
-        loadscript("http://staticftp.mgcc.com.cn/wechat/js/vconsole.min.js");
-    }
+    //if (GetQueryString("console") == "T") {
+    //    loadscript("http://staticftp.mgcc.com.cn/wechat/js/vconsole.min.js");
+    //}
 	function loadPredefinedPanorama() {
 		PSV = new PhotoSphereViewer({
 			panorama: imgpath,
