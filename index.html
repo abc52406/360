@@ -1,51 +1,168 @@
-﻿<!doctype html>
-<html lang="zh">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title></title>
-	<style type="text/css">
-        html,body {
-            overflow: hidden;
-			margin:0;
-			padding:0;
-        }
-        .loading{
-            text-align:center;
-            position:absolute;
-            top:0;
-            z-index:9999;
-        }
-        .loading img{
-            vertical-align:middle;
-        }
-        .loading span {
-            height: 100%;
-            vertical-align: middle;
-            display:inline-block
-        }
-        .roll {
-            -webkit-animation: 2.5s linear roll 0s infinite;
-        }
-
-        @-webkit-keyframes roll {
-            0% {
-                -webkit-transform: rotate(0deg);
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="全景图">
+    <meta name="description" content="pengbo.info 全景图">
+    <link rel="icon" type="image/png" href="/public/favicons/favicon-96x96.png" sizes="96x96">
+    <title>全景图</title>
+    <link rel="stylesheet" type="text/css" href="/public/css/pro/event-post-image-af19effa.css">
+    <style type="text/css">
+        @media (min-width: 900px){
+            body:not(.force-desktop) .mobile-frame-ct {
+                overflow: auto;
+                width: 100%;
+                height: 100%;
+                z-index: 10;
+                border: 0px solid #000;
+                border-radius: 0px;
+                top: 0;
+                left: 0;
+                margin-top: 0;
+                margin-left: 0
             }
-
-            100% {
-                -webkit-transform: rotate(360deg);
-            }
+			body:not(.force-desktop) {
+				min-height: 0px;
+				background-image: url('');
+				overflow: hidden;
+			}
         }
+		.liner-bg.no-album.no-ad,.liner-bg.no-album,.liner-bg.no-ad{
+			bottom:0;
+		}
     </style>
 </head>
-<body>
-	<div id="container"></div>
-    <div class="loading"><img src="loading.jpg" alt="loading" class="roll"><span></span></div>
+<body class="body">
+    <!-- 继承页面 -->
+    <div class="wechat" style="display:none;">
+        <img id="shareimg" src="" alt="shareimg" width="300" height="300">
+    </div>
+    <div class="mobile-frame-ct">
+        <div class="qrcode-ct">
+            <div class="qrcode"></div>
+        </div>
+        <div id="pano-player" class="pano-player">
+            <noscript>
+                <table style="width:100%;height:100%;">
+                    <tr style="vertical-align:middle;">
+                        <td>
+                            <div style="text-align:center;">ERROR:
+                                <br/>
+                                <br/>Javascript not activated
+                                <br/>
+                                <br/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </noscript>
+        </div>
+
+        <div class="configmenu-mask">
+            <div class="configmenu-ct">
+                <div class="config-title">
+                    设置 <i class="cancle-config iconfont">&#xe614;</i>
+                </div>
+                <ul class="config-list">
+                    <li class="vr-ctl">
+                        <i class="iconfont">&#xe607;</i>
+                        VR 模式
+                        <i class="switcher"></i>
+                    </li>
+                    <li class="gyro-ctl">
+                        <i class="iconfont">&#xe608;</i>
+                        陀螺仪
+                        <i class="switcher"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="liner-bg-top"></div>
+        <div class="liner-bg no-album no-ad"></div>
+        <div class="actions-ct no-ad">
+            <div class="intro">
+                <div class="text-ct">
+                    <span class="text"></span>
+                </div>
+                <span class="text-more">...</span>
+            </div>
+            <div class="widgets">
+                <div class="col time">
+                    <i class="iconfont">&#xe603;</i>
+                    <span class="txt-val post-time-content" data-time="1490954626000"></span>
+                </div>
+                <div class="col views">
+                    <i class="iconfont">&#xe604;</i>
+                    <span class="txt-val">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-detail no-ad">
+            <i class="cancle-detail iconfont">&#xe614;</i>
+            <div class="info-text">
+            </div>
+        </div>
+    </div>
+    <script src="/public/player-img/tour.js?v=pr8"></script>
+    <script>
+function GetQueryString(prop, url) {
+    var re = new RegExp("[?|&]" + prop + "=([^\\&]*)", "i");
+    if (!url) {
+        url = document.location.search;
+    }
+    else {
+        if (url.indexOf("?") >= 0) {
+            url = url.split("?")[1];
+        }
+        else {
+            url = "";
+        }
+    }
+    var a = re.exec(url);
+    if (a == null) return "";
+    return a[1];
+}
+document.title = decodeURI(GetQueryString("tt")||'全景图');
+	
+        embedpano({
+            swf:"/public/player-img/tour.swf?v=pr8",
+            xml:"/public/player-img/tour-bcd5eeee.xml",
+            target:"pano-player",
+            html5:"prefer",
+            passQueryParameters:true,
+
+            initvars:{
+                dishDistortion: 1, //默认渐变后畸变大小 默认1
+                enableAutorotate: false,
+                fisheyeFov: 90,
+                viewController: 'drag', //控制方式 'gyro'|'drag'
+                debug: false,
+                design:"custom",
+                maxpixelzoom: "0.8",
+                locale: "zh",
+                //以下为相册配置
+                scenesURL: 'https://s.insta360.com/p/'+GetQueryString('sen')+'/scenes' + window.location.search, //相册资源xml配置地址（xml由后端模板生成)
+                gallery: false //是否开启相册模式
+            }
+        });
+		
+
+	var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari  
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5  
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.open("GET", "https://s.insta360.com/p/"+GetQueryString('sen')+"/scenes", false);
+    xmlhttp.send();
+    var xmlstr = xmlhttp.responseXML.firstChild.innerHTML;
+    var staticresult = xmlstr.substring(xmlstr.indexOf('thumb/') + 6, xmlstr.indexOf('start.jpg'));
+	document.getElementById('shareimg').src='https://static.insta360.com/share/public/media/thumb/'+staticresult+'start.jpg?imageView2/0/w/300/h/300';
+    </script>
 </body>
 </html>
-<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
-<script src="js/three.min.js"></script>
-<script src="js/photo-sphere-viewer.min.js"></script>
-<script src="js/index.js"></script>
