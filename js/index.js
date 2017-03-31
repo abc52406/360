@@ -1,10 +1,15 @@
 $(function () {
-	var w = $(window).width(), h = $(window).height();
+    var w = $(window).width(), h = $(window).height(), PSV;
+    var div = document.getElementById('container');
 	var imgpath=GetQueryString("ip")||'sun.jpg';
 	var title=decodeURI(GetQueryString("tt")||'全景图');
 	$(document).attr("title",title);
     loadPredefinedPanorama();
-
+    $(window).resize(function () {
+        w = $(window).width(), h = $(window).height();
+        $("#container,#container canvas").width(w).height(h);
+        PSV.fitToContainer();
+    });
     if (GetQueryString("share") == "T") {
         loadscript("http://res.wx.qq.com/open/js/jweixin-1.0.0.js", function () {
             loadscript("http://qiniu.mgcc.com.cn/wechat/js/base64.min.js", function () {
@@ -13,8 +18,7 @@ $(function () {
         })
     }
 	function loadPredefinedPanorama() {
-		var div = document.getElementById('container');
-		var PSV = new PhotoSphereViewer({
+		PSV = new PhotoSphereViewer({
 			panorama: imgpath,
 			container: div,
 			time_anim: false,
@@ -24,7 +28,7 @@ $(function () {
 				height: h
 			}
 		});
-	}
+    }
 	function upload() {
 		var file = document.getElementById('pano').files[0];
 		var reader = new FileReader();

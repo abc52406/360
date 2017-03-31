@@ -27,43 +27,43 @@
  * Represents a panorama viewer.
  * @class
  * @param {object} args - Settings to apply to the viewer
- * @param {string} args.panorama - Panorama URL or path (absolute or relative)
- * @param {HTMLElement} args.container - Panorama container (should be a `div` or equivalent)
- * @param {boolean} [args.autoload=true] - `true` to automatically load the panorama, `false` to load it later (with the {@link PhotoSphereViewer#load|`.load`} method)
- * @param {boolean} [args.usexmpdata=true] - `true` if Photo Sphere Viewer must read XMP data, `false` if it is not necessary
- * @param {object} [args.default_position] - Defines the default position (the first point seen by the user)
- * @param {number|string} [args.default_position.long=0] - Default longitude, in radians (or in degrees if indicated, e.g. `'45deg'`)
- * @param {number|string} [args.default_position.lat=0] - Default latitude, in radians (or in degrees if indicated, e.g. `'45deg'`)
- * @param {number} [args.min_fov=30] - The minimal field of view, in degrees, between 1 and 179
- * @param {number} [args.max_fov=90] - The maximal field of view, in degrees, between 1 and 179
- * @param {boolean} [args.allow_user_interactions=true] - If set to `false`, the user won't be able to interact with the panorama (navigation bar is then disabled)
- * @param {number|string} [args.tilt_up_max=π/2] - The maximal tilt up angle, in radians (or in degrees if indicated, e.g. `'30deg'`)
- * @param {number|string} [args.tilt_down_max=π/2] - The maximal tilt down angle, in radians (or in degrees if indicated, e.g. `'30deg'`)
- * @param {number} [args.zoom_level=0] - The default zoom level, between 0 and 100
- * @param {number} [args.long_offset=π/360] - The longitude to travel per pixel moved by mouse/touch
- * @param {number} [args.lat_offset=π/180] - The latitude to travel per pixel moved by mouse/touch
- * @param {integer} [args.time_anim=2000] - Delay before automatically animating the panorama in milliseconds, `false` to not animate
- * @param {integer} [args.theta_offset=1440] - (deprecated, use `anim_speed` instead) The π fraction to add to theta during the animation
- * @param {string} [args.anim_speed=2rpm] - Animation speed in radians/degrees/revolutions per second/minute
- * @param {boolean} [args.navbar=false] - Display the navigation bar if set to `true`
- * @param {object} [args.navbar_style] - Style of the navigation bar
- * @param {string} [args.navbar_style.backgroundColor=rgba(61, 61, 61, 0.5)] - Navigation bar background color
- * @param {string} [args.navbar_style.buttonsColor=rgba(255, 255, 255, 0.7)] - Buttons foreground color
- * @param {string} [args.navbar_style.buttonsBackgroundColor=transparent] - Buttons background color
- * @param {string} [args.navbar_style.activeButtonsBackgroundColor=rgba(255, 255, 255, 0.1)] - Active buttons background color
- * @param {number} [args.navbar_style.buttonsHeight=20] - Buttons height in pixels
- * @param {number} [args.navbar_style.autorotateThickness=1] - Autorotate icon thickness in pixels
- * @param {number} [args.navbar_style.zoomRangeWidth=50] - Zoom range width in pixels
- * @param {number} [args.navbar_style.zoomRangeThickness=1] - Zoom range thickness in pixels
- * @param {number} [args.navbar_style.zoomRangeDisk=7] - Zoom range disk diameter in pixels
- * @param {number} [args.navbar_style.fullscreenRatio=4/3] - Fullscreen icon ratio (width/height)
- * @param {number} [args.navbar_style.fullscreenThickness=2] - Fullscreen icon thickness in pixels
- * @param {string} [args.loading_msg=Loading…] - Loading message
- * @param {string} [args.loading_img=null] - Loading image URL or path (absolute or relative)
- * @param {object} [args.size] - Final size of the panorama container (e.g. {width: 500, height: 300})
+ * @param {string} args.panorama - 必填参数，全景图的路径
+ * @param {HTMLElement} args.container - 必填参数，放置全景图的div元素
+ * @param {boolean} [args.autoload=true] - 可选，默认值为true，true为自动调用全景图，false为在后面加载全景图（通过.load()方法）
+ * @param {boolean} [args.usexmpdata=true] - 可选，默认值为true，如果Photo Sphere Viewer必须读入XMP数据则为true
+ * @param {object} [args.default_position] -可选，默认值为{}，定义默认的位置，及用户看见的第一个点，例如：{long: Math.PI, lat: Math.PI/2}
+ * @param {number|string} [args.default_position.long=0] - 可选，默认值为{}，定义默认的位置，及用户看见的第一个点，例如：{long: Math.PI, lat: Math.PI/2}
+ * @param {number|string} [args.default_position.lat=0] - 可选，默认值为{}，定义默认的位置，及用户看见的第一个点，例如：{long: Math.PI, lat: Math.PI/2}
+ * @param {number} [args.min_fov=30] - 可选，默认值为30，观察的最小区域，单位degrees，在1-179之间
+ * @param {number} [args.max_fov=90] - 可选，默认值为90，观察的最大区域，单位degrees，在1-179之间
+ * @param {boolean} [args.allow_user_interactions=true] - 可选，默认值为true，设置为false则禁止用户和全景图交互（导航条不可用）
+ * @param {number|string} -可选，默认值为Math.PI/2，向上倾斜的最大角度，单位radians
+ * @param {number|string} -可选，默认值为Math.PI/2，向下倾斜的最大角度，单位radians
+ * @param {number} [args.zoom_level=0] - 可选，默认值为0，默认的缩放级别，值在0-100之间
+ * @param {number} [args.long_offset=π/360] - 可选，默认值为PI/360，mouse/touch移动时每像素经过的经度值
+ * @param {number} [args.lat_offset=π/180] - 可选，默认值为PI/180，mouse/touch移动时每像素经过的纬度值
+ * @param {integer} [args.time_anim=2000] - 可选，默认值为2000，全景图在time_anim毫秒后会自动进行动画。（设置为false禁用它）
+ * @param {integer} [args.theta_offset=1440] - 过时的选项，可选，默认值为1440，自动动画时水平方向的速度
+ * @param {string} [args.anim_speed=2rpm] - 可选，默认值为2rpm，动画的速度，每秒/分钟多少radians/degrees/revolutions
+ * @param {boolean} [args.navbar=false] - 可选值，默认为false。显示导航条
+ * @param {object} [args.navbar_style] - 可选值，默认为{}。导航条的自定义样式。下面是可用的样式列表：
+ * @param {string} [args.navbar_style.backgroundColor=rgba(61, 61, 61, 0.5)] - 导航条的背景颜色，默认值为rgba(61, 61, 61, 0.5)
+ * @param {string} [args.navbar_style.buttonsColor=rgba(255, 255, 255, 0.7)] - 按钮的前景颜色，默认值为rgba(255, 255, 255, 0.7)
+ * @param {string} [args.navbar_style.buttonsBackgroundColor=transparent] - 按钮的背景颜色，默认值为transparent
+ * @param {string} [args.navbar_style.activeButtonsBackgroundColor=rgba(255, 255, 255, 0.1)] - 按钮激活状态的背景颜色，默认值为rgba(255, 255, 255, 0.1)
+ * @param {number} [args.navbar_style.buttonsHeight=20] - 按钮的高度，单位像素，默认值为20
+ * @param {number} [args.navbar_style.autorotateThickness=1] - autorotate图标的厚度，单位像素，默认值为1
+ * @param {number} [args.navbar_style.zoomRangeWidth=50] - 缩放的范围，单位显示，默认值50
+ * @param {number} [args.navbar_style.zoomRangeThickness=1] - 缩放的范围的厚度，单位像素，默认值1
+ * @param {number} [args.navbar_style.zoomRangeDisk=7] - 缩放范围的圆盘直径，单位像素，默认值为7
+ * @param {number} [args.navbar_style.fullscreenRatio=4/3] - 全屏图标的比例，默认值为3/4
+ * @param {number} [args.navbar_style.fullscreenThickness=2] - 全屏图标的厚度，单位像素，默认值为2
+ * @param {string} [args.loading_msg=Loading…] - 可选，默认值为Loading…，图片加载时的提示文字
+ * @param {string} [args.loading_img=null] - 可选，默认值为null，在加载时显示的图片的路径
+ * @param {object} [args.size] - 可选，默认值null，全景图容器的最终尺寸。例如：{width: 500, height: 300}
  * @param {(number|string)} [args.size.width] - Final width in percentage (e.g. `'50%'`) or pixels (e.g. `500` or `'500px'`) ; default to current width
  * @param {(number|string)} [args.size.height] - Final height in percentage or pixels ; default to current height
- * @param {PhotoSphereViewer~onReady} [args.onready] - Function called once the panorama is ready and the first image is displayed
+ * @param {PhotoSphereViewer~onReady} [args.onready] - 可选值，默认值为null。当全景图准备就绪并且第一张图片显示时的回调函数
  **/
 
 var PhotoSphereViewer = function(args) {
