@@ -11,10 +11,25 @@
 			margin:0;
 			padding:0;
         }
+        .loading{
+            text-align:center;
+            position:absolute;
+            top:0;
+            z-index:9999;
+        }
+        .loading img{
+            vertical-align:middle;
+        }
+        .loading span {
+            height: 100%;
+            vertical-align: middle;
+            display:inline-block
+        }
     </style>
 </head>
 <body>
 	<div id="container"></div>
+    <div class="loading"><img src="loading.png" alt="loading"><span></span></div>
 </body>
 </html>
 <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>

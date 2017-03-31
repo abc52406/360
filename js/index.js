@@ -1,5 +1,6 @@
 $(function () {
     var w = $(window).width(), h = $(window).height(), PSV;
+    $(".loading").width(w).height(h);
     var div = document.getElementById('container');
 	var imgpath=GetQueryString("ip")||'sun.jpg';
 	var title=decodeURI(GetQueryString("tt")||'全景图');
@@ -26,7 +27,8 @@ $(function () {
 			size: {
 				width: w,
 				height: h
-			}
+            },
+            onready: function () { $(".loading").hide();}
 		});
     }
 	function upload() {
