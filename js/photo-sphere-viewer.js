@@ -2358,14 +2358,14 @@ var Sphoords = function() {
 Sphoords.getScreenOrientation = function() {
 	var screen_orientation = null;
 
-	if (!!screen.orientation)
-		screen_orientation = screen.orientation;
+    if (!!window.orientation)
+        screen_orientation = window.orientation;
 
-	else if (!!screen.mozOrientation)
-		screen_orientation = screen.mozOrientation;
+    else if (!!window.mozOrientation)
+        screen_orientation = window.mozOrientation;
 
-	else if (!!screen.msOrientation)
-		screen_orientation = screen.msOrientation;
+    else if (!!window.msOrientation)
+        screen_orientation = window.msOrientation;
 
 	// Are the specs respected?
 	return (screen_orientation !== null && (typeof screen_orientation == 'object')) ? screen_orientation.type : screen_orientation;
